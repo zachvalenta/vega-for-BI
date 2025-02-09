@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BI Reports</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #FAF3E0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1.2em;
+            width: 60%;
+            border: 2px solid #333;
+        }
+        .reports-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .report-card {
+            width: 250px;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+        .report-card:hover {
+            transform: scale(1.05);
+        }
+        .report-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .report-card a {
+            display: block;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #004A77;
+            cursor: pointer;
+        }
+        .report-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the BI Reports Hub</h1>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Search reports..." hx-get="/search" hx-trigger="keyup changed delay:200ms" hx-target=".reports-container" hx-indicator=".search-box" oninput="filterReports()">
+    </div>
+    <div class="reports-container">
+        <a href="reports/foo.html" class="report-card-link">
+            <div class="report-card" data-name="foo-report">
+                <img src="static/foo.webp" alt="Foo Report">
+                <p>Foo Report</p>
+            </div>
+        </a>
+        <a href="reports/bar.html" class="report-card-link">
+            <div class="report-card" data-name="bar-report">
+                <img src="static/bar.webp" alt="Bar Report">
+                <p>Bar Report</p>
+            </div>
+        </a>
+        <a href="reports/baz.html" class="report-card-link">
+            <div class="report-card" data-name="baz-report">
+                <img src="static/baz.webp" alt="Baz Report">
+                <p>Baz Report</p>
+            </div>
+        </a>
+    </div>
+    <script>
+        function filterReports() {
+            let query = document.getElementById('search').value.toLowerCase();
+            document.querySelectorAll('.report-card').forEach(card => {
+                let name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(query) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
+

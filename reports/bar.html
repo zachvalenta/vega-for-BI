@@ -1,0 +1,21 @@
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script src="https://cdn.jsdelivr.net/gh/koaning/justcharts/justcharts.js"></script>
+
+<vegachart style="width: 100%">
+    {
+        "title": "this is a simple demo",
+        "width": "container",
+        "mark": "line",
+        "data":{
+            "url": "https://corsproxy.io/?https://docs.google.com/spreadsheets/d/e/2PACX-1vSxws6tVrazsqZSkc5nwzRx-PTMAXQliSFTXZIWMi6YFvZ2jocAt7dVCv0mmyqfWd4L8-ROAp_BSzeA/pub?output=csv",
+            "format": { "type": "csv" }
+        },
+        "encoding": {
+            "x": {"field": "sale_date", "type": "temporal"},
+            "y": {"field": "total_sales", "type": "quantitative"},
+            "color": {"field": "currency_code", "type": "nominal"}
+        }
+    }
+</vegachart>
